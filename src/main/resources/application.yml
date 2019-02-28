@@ -1,0 +1,32 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: api_route
+        uri: lb://skillMgr
+        predicates:
+        - Path=/api/**
+        filters:
+        - RewritePath=/api/(?<path>.*), /api/$\{path}
+      - id: ui_route
+        uri: lb://service-ui
+        predicates:
+        - Path=/ui/**
+        filters:
+        - RewritePath=/ui/(?<path>.*), /$\{path}
+eureka:
+  client:
+    service-url: 
+      defaultZone: http://localhost:8761/eureka
+logging:
+  level:
+    root: INFO
+    jp.co.sunarch: DEBUG
+  file: logs/${spring.application.name}.log
