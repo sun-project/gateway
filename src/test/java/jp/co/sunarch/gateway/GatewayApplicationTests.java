@@ -1,4 +1,4 @@
-package com.example.demo;
+package jp.co.sunarch.gateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
