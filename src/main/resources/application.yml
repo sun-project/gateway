@@ -10,13 +10,13 @@ spring:
           enabled: true
       routes:
       - id: api_route
-        uri: lb://skillMgr
+        uri: lb://skillMgrApi
         predicates:
         - Path=/api/**
         filters:
         - RewritePath=/api/(?<path>.*), /api/$\{path}
       - id: ui_route
-        uri: lb://service-ui
+        uri: lb://skillMgrUi
         predicates:
         - Path=/ui/**
         filters:
