@@ -20,7 +20,7 @@ spring:
         predicates:
         - Path=/ui/**
         filters:
-        - RewritePath=/ui/(?<path>.*), /$\{path}
+        - RewritePath=/ui/(?<path>.*), /ui/$\{path}
 eureka:
   client:
     serviceUrl:
