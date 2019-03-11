@@ -12,9 +12,9 @@ spring:
       - id: api_route
         uri: lb://skillMgrApi
         predicates:
-        - Path=/api/**
+        - Path=/skillmgr/api/**
         filters:
-        - RewritePath=/api/(?<path>.*), /api/$\{path}
+        - RewritePath=/skillmgr/api/(?<path>.*), /skillmgr/api/$\{path}
       - id: ui_route
         uri: lb://skillMgrUi
         predicates:
