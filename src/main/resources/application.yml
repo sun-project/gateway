@@ -18,9 +18,9 @@ spring:
       - id: ui_route
         uri: lb://skillMgrUi
         predicates:
-        - Path=/ui/**
+        - Path=/skillmgr/ui/**
         filters:
-        - RewritePath=/ui/(?<path>.*), /ui/$\{path}
+        - RewritePath=/skillmgr/ui/(?<path>.*), /skillmgr/ui/$\{path}
 eureka:
   client:
     serviceUrl:
