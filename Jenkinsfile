@@ -5,16 +5,25 @@ pipeline {
     registryCredential = 'registry.kirin.mydns.jp'
   }
   agent {
-    docker { image 'java:8-jdk-alpine' }
+    label 'docker'
   }
   stages {
+    agent {
+      docker { image 'java:8-jdk-alpine' }
+    }
     stage('Build') {
       steps {
         sh './mvnw package'
       }
+      post {
+        success {
+          stash name: 'jar', includes: 'target/*.jar'
+        }
+      }
     }
     stage('Building image') {
       steps {
+        unstash name: 'jar'
         script {
           dockerImage = docker.build env.image
         }
