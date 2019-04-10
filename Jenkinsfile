@@ -8,7 +8,7 @@ pipeline {
     label 'docker'
   }
   stages {
-    state('Build') {
+    stage('Build') {
       steps {
         sh './mvnw package'
       }
