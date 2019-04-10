@@ -8,10 +8,10 @@ pipeline {
     label 'docker'
   }
   stages {
-    agent {
-      docker { image 'java:8-jdk-alpine' }
-    }
     stage('Build') {
+      agent {
+        docker { image 'java:8-jdk-alpine' }
+      }
       steps {
         sh './mvnw package'
       }
