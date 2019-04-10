@@ -5,7 +5,7 @@ pipeline {
     registryCredential = 'registry.kirin.mydns.jp'
   }
   agent {
-    label 'docker'
+    docker { image 'java:8-jdk-alpine' }
   }
   stages {
     stage('Build') {
