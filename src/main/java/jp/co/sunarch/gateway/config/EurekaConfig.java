@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "eureka")
 public class EurekaConfig {
 
+	public static final String prefix = "eureka";
+
 	private Map<String, String> client = null;
 
 	public Map<String, String> getClient() {

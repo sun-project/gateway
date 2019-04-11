@@ -10,24 +10,23 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: false
+          enabled: true
       routes:
       - id: api_route
-        uri: http://localhost:8081
+        uri: lb://skillMgrApi
         predicates:
         - Path=/skillmgr/api/**
         filters:
         - RewritePath=/skillmgr/api/(?<path>.*), /skillmgr/api/$\{path}
-        - TokenRelay=jp.co.sunarch.gateway.rules.GatewayAuthRelayFilterFactory
       - id: ui_route
-        uri: http://localhost:3000
+        uri: lb://skillMgrUi
         predicates:
         - Path=/skillmgr/ui/**
         filters:
         - RewritePath=/skillmgr/ui/(?<path>.*), /skillmgr/ui/$\{path}
     service-registry:
       auto-registration:
-        enabled: false
+        enabled: true
   security:
     oauth2:
       client:
@@ -54,7 +53,7 @@ spring:
 #            scope: openid,profile,email
 eureka:
   client:
-    enabled: false
+    enabled: true
     serviceUrl:
       defaultZone: http://discovery:8761/eureka
 logging:
