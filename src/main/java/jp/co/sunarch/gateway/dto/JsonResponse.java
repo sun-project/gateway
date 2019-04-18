@@ -4,36 +4,18 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class JsonResponse implements Serializable{
 
-	private JsonResponseRequest request = new JsonResponseRequest();
+	@JsonProperty("user_info")
+	private Map<String, Object> userInfo = new HashMap<String, Object>();
 
-	private Map<String, Object> result = new HashMap<String, Object>();
-
-	private Map<String, Object> response = new HashMap<String, Object>();
-
-	public JsonResponseRequest getRequest() {
-		return request;
+	public Map<String, Object> getUserInfo() {
+		return userInfo;
 	}
 
-	public void setRequest(JsonResponseRequest request) {
-		this.request = request;
+	public void setUserInfo(Map<String, Object> userInfo) {
+		this.userInfo = userInfo;
 	}
-
-	public Map<String, Object> getResult() {
-		return result;
-	}
-
-	public void setResult(Map<String, Object> result) {
-		this.result = result;
-	}
-
-	public Map<String, Object> getResponse() {
-		return response;
-	}
-
-	public void setResponse(Map<String, Object> response) {
-		this.response = response;
-	}
-
 }
