@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 spring:
   autoconfigure:
     # TODO: remove when fixed https://github.com/spring-projects/spring-security/issues/6314
@@ -18,7 +18,6 @@ spring:
         - Path=/skillmgr/api/**
         filters:
         - RewritePath=/skillmgr/api/(?<path>.*), /skillmgr/api/$\{path}
-        - TokenRelay=jp.co.sunarch.gateway.rules.GatewayAuthRelayFilterFactory
       - id: ui_route
         uri: http://localhost:3000
         predicates:
@@ -30,28 +29,27 @@ spring:
         enabled: false
   security:
     oauth2:
-      client:
-        registration:
-          keycloak: 
-            client-id: gateway
-            client-secret: 244cc4e8-23d9-43ca-a8d9-f7afcff73b15
-            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
-            authorizationGrantType: authorization_code
-            scope: openid,email,profile,roles
-            client-name: gateway
-        provider:
-          keycloak:
-            tokenUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/token
-            authorizationUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/auth
-            jwkSetUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/certs
-            userInfoUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/userinfo
-            userNameAttribute: preferred_username
-#          google:
-#            client-id: 562961256628-209b99mgb8tr7hdrppqetjuctd3l686c.apps.googleusercontent.com
-#            client-secret: NBhJ55xpyb6MrQXKmAmUGC74
-#            authorization-grant-type: authorization_code
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          keycloak: 
+#            client-id: gateway
+#            client-secret: 244cc4e8-23d9-43ca-a8d9-f7afcff73b15
 #            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
-#            scope: openid,profile,email
+#            authorizationGrantType: authorization_code
+#            scope: openid,email,profile,roles
+#            client-name: gateway
+#        provider:
+#          keycloak:
+#            tokenUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/token
+#            authorizationUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/auth
+#            jwkSetUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/certs
+#            userInfoUri: https://keycloak.giraffe.mydns.jp/auth/realms/dev.app.sunarch.co.jp/protocol/openid-connect/userinfo
+#            userNameAttribute: preferred_username
 eureka:
   client:
     enabled: false
