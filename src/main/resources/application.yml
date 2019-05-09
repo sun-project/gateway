@@ -18,7 +18,6 @@ spring:
         - Path=/skillmgr/api/**
         filters:
         - RewritePath=/skillmgr/api/(?<path>.*), /skillmgr/api/$\{path}
-        - AddResponseHeader=Access-Control-Allow-Origin, *
       - id: ui_route
         uri: http://localhost:3000
         predicates:
